@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { formStore } from "$lib/stores/formStore.svelte";
+    import { page } from '$app/stores'
 </script>
 
 <div class="text-neutral-300 m-2">
@@ -15,7 +15,7 @@
 
     <br>
 
-    {#if formStore.data?.error}
+    {#if $page.form?.error}
         <p class="mt-2 text-red-500">Error: {formStore.data.error}</p>
     {/if}
 </div>
