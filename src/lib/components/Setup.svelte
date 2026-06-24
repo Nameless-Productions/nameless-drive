@@ -16,6 +16,6 @@
     <br>
 
     {#if $page.form?.error}
-        <p class="mt-2 text-red-500">Error: {formStore.data.error}</p>
+        <p class="mt-2 text-red-500">Error: {$page.form.error}</p>
     {/if}
 </div>
