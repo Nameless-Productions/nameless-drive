@@ -15,7 +15,7 @@
 
     <br>
 
-    {#if formStore.data.error}
+    {#if formStore.data?.error}
         <p class="mt-2 text-red-500">Error: {formStore.data.error}</p>
     {/if}
 </div>
