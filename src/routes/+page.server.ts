@@ -9,7 +9,9 @@ export const actions: Actions = {
 
         const username = data.get("username")?.toString()
         const password = data.get("password")?.toString()
-        if(!username || !password) return fail(400, {error: "All fields are required"})
+        if(!username || !password) return fail(400, {error: "All fields are required"});
+        const users = await db.user.findMany()
+        if (users.length !== 0) return fail(403, {error: "User already exists"})
 
         const passwordHash = await bcrypt.hash(password, 10)
 
