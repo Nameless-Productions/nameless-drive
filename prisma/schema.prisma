@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  username String @unique
+  password String
+}
+
+model Storage {
+  id Int @id @default(autoincrement())
+  name String // the files/folder name to display and download as
+  dbName String? @unique @default(ulid()) // the name it is stored as, empty if it's a folder
+  parentId Int? // the parent ID, empty if it's in root
+  isFolder Boolean
+}
