@@ -10,7 +10,9 @@ export function createToken(payload: {uid: number, username: string}){
 
 export function verifyToken(jwtToken: string){
     try{
-        return jwt.verify(jwtToken, secret!) as {uid?: number, username?: string};
+        const usr = jwt.verify(jwtToken, secret!) as {uid?: number, username?: string};
+        if(!usr.uid || !usr.username) return;
+        return usr;
     }
     catch{
         return;
