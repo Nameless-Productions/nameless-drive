@@ -1,3 +1,7 @@
+<script lang="ts">
+    let {form} = $props()
+</script>
+
 <p class="font-bold text-xl">Log in</p>
 
 <form action="?/login" method="POST">
@@ -7,3 +11,7 @@
     <br>
     <input type="submit" value="Log in" class="mt-2">
 </form>
+
+{#if form?.error}
+    <p class="mt-2 text-red-500">{form.error}</p>
+{/if}
