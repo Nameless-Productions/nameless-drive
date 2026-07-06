@@ -3,10 +3,11 @@
 </script>
 
 <p class="font-bold">{data.name}</p>
+<br>
 
 <div>
     {#each data.folderChildren as c (c.id)}
-        <div class="flex border-t-2 border-t-black border-b-2 border-b-black items-center">
+        <div class="flex border-t-2 border-t-black border-b-2 border-b-black items-center space-x-3">
             {#if c.isFolder}
                 <img src="/folder.svg" alt="folder" class="w-7 h-7">
                 {:else}
