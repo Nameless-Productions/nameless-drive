@@ -39,7 +39,8 @@ export const actions: Actions = {
             data: {
                 isFolder: true,
                 name: folderName,
-                parentId: Number(parent)
+                parentId: Number(parent),
+                dbName: null
             }
         })
 

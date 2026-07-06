@@ -44,7 +44,8 @@ export const actions: Actions = {
         const newFolder = await db.storage.create({
             data: {
                 isFolder: true,
-                name: folderName
+                name: folderName,
+                dbName: null
             }
         })
 
