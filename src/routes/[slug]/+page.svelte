@@ -4,6 +4,11 @@
     let {data} = $props()
 
     let parentFolder = $derived(data.parent ?? "")
+
+    function getUrl(isFolder: boolean, id: number) {
+        if(isFolder) return `/${id}`;
+        return `/download/${id}`
+    }
 </script>
 
 <p class="font-bold">{data.name}</p>
@@ -16,7 +21,7 @@
 
 <div>
     {#each data.folderChildren as c (c.id)}
-        <a href={resolve(`/${c.id}`)} class="flex border-t-2 border-t-black border-b-2 border-b-black items-center space-x-3">
+        <a href={getUrl(c.isFolder, c.id)} class="flex border-t-2 border-t-black border-b-2 border-b-black items-center space-x-3">
             {#if c.isFolder}
                 <img src="/folder.svg" alt="folder" class="w-7 h-7">
                 {:else}

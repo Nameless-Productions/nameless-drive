@@ -4,24 +4,28 @@ import type { Actions, PageServerLoad } from "./$types";
 import { uploadFile } from "$lib/uploadFile";
 
 export const load: PageServerLoad = async ({params}) => {
-    const folderID = params.slug;
+    const thingID = params.slug;
 
-    const folderDB = await db.storage.findUnique({
+    const thingDB = await db.storage.findUnique({
         where: {
-            isFolder: true,
-            id: Number(folderID)
+            id: Number(thingID)
         }
     })
 
-    if(!folderDB) throw error(404, "Folder not found");
+    if(!thingDB) throw error(404, "Folder not found");
 
-    const folderChildren = await db.storage.findMany({
-        where: {
-            parentId: folderDB.id
-        }
-    })
+    if(thingDB.isFolder) {
+        const folderChildren = await db.storage.findMany({
+            where: {
+                parentId: thingDB.id
+            }
+        })
 
-    return {name: folderDB.name, folderChildren, parent: folderDB.parentId}
+        return {name: thingDB.name, folderChildren, parent: thingDB.parentId}
+    }
+
+    throw error(404, "Not a folder")
+
 }
 
 export const actions: Actions = {
