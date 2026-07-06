@@ -12,8 +12,9 @@ export async function uploadFile(file: File, parent?: number) {
         }
     })
     const storedName = fileDB.dbName;
+    const filesPath = path.join(process.cwd(), "files")
+    const filePath = path.join(filesPath, storedName!);
 
-    const filePath = path.join(process.cwd(), "files", storedName!);
-    await fs.mkdir(filePath, {recursive: true});
+    await fs.mkdir(filesPath, {recursive: true});
     await fs.writeFile(filePath, fileBuffer)
 }
