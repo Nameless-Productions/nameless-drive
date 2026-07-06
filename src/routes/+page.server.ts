@@ -1,7 +1,17 @@
 import { fail, redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
 import bcrypt from "bcrypt"
 import { db } from "$lib/db";
+
+export const load: PageServerLoad = async () => {
+    const thingsInRoot = await db.storage.findMany({
+        where: {
+            parentId: null
+        }
+    })
+
+    return {stuff: thingsInRoot}
+}
 
 export const actions: Actions = {
     account: async ({request}) => {
