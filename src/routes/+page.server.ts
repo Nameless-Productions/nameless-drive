@@ -23,5 +23,20 @@ export const actions: Actions = {
         })
 
         return redirect(301, new URL("/", request.url))
+    },
+
+    folder: async ({request}) => {
+        const formData = await request.formData()
+        const folderName = formData.get("name")?.toString()
+        if(!folderName) return fail(400, {error: "Folder name required"})
+
+        const newFolder = await db.storage.create({
+            data: {
+                isFolder: true,
+                name: folderName
+            }
+        })
+
+        return redirect(301, new URL(`/${newFolder.id}`, request.url))
     }
 }

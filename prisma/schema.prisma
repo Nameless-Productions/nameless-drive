@@ -21,7 +21,7 @@ model User {
 model Storage {
   id Int @id @default(autoincrement())
   name String // the files/folder name to display and download as
-  dbName String? @unique @default(ulid()) // the name it is stored as, empty if it's a folder
+  dbName String? @unique @default(uuid()) // the name it is stored as, empty if it's a folder
   parentId Int? // the parent ID, empty if it's in root
   isFolder Boolean
 }
