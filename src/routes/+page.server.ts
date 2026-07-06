@@ -2,6 +2,7 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import bcrypt from "bcrypt"
 import { db } from "$lib/db";
+import { uploadFile } from "$lib/uploadFile";
 
 export const load: PageServerLoad = async () => {
     const thingsInRoot = await db.storage.findMany({
@@ -48,5 +49,12 @@ export const actions: Actions = {
         })
 
         return redirect(301, new URL(`/${newFolder.id}`, request.url))
+    },
+
+    file: async ({request}) => {
+        const formData = await request.formData()
+        const file = formData.get("file") as File | null;
+        if(!file) return fail(400, {error: "File required"});
+        await uploadFile(file, undefined);
     }
 }

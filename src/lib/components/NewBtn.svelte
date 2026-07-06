@@ -36,7 +36,7 @@
         <button type="button" onclick={() => fileDialog.close()} class="top-2 left-2 absolute w-7 h-7 flex hover:bg-neutral-700 rounded-xl p-1 items-center justify-center duration-300 cursor-pointer">X</button>
 
         <form action="?/file" method="POST">
-            <input type="file" required>
+            <input type="file" name="file" required>
             <br>
             <input type="submit" class="mt-3" value="Upload">
         </form>

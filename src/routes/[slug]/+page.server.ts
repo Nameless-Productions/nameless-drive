@@ -1,6 +1,7 @@
 import { db } from "$lib/db";
 import { error, fail, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
+import { uploadFile } from "$lib/uploadFile";
 
 export const load: PageServerLoad = async ({params}) => {
     const folderID = params.slug;
@@ -39,5 +40,12 @@ export const actions: Actions = {
         })
 
         return redirect(301, new URL(`/${newFolder.id}`, request.url))
+    },
+
+    file: async ({request, params}) => {
+        const formData = await request.formData()
+        const file = formData.get("file") as File | null;
+        if(!file) return fail(400, {error: "File required"});
+        await uploadFile(file, Number(params.slug));
     }
 }

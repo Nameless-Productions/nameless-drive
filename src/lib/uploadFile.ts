@@ -2,12 +2,11 @@ import path from "path"
 import fs from "fs/promises"
 import { db } from "./db";
 
-export async function uploadFile(name: string, file: File, parent?: number) {
+export async function uploadFile(file: File, parent?: number) {
     const fileBuffer = Buffer.from(await file.arrayBuffer())
-
     const fileDB = await db.storage.create({
         data: {
-            name,
+            name: file.name,
             parentId: parent,
             isFolder: false
         }
