@@ -20,7 +20,7 @@ export const load: PageServerLoad = async ({params}) => {
         }
     })
 
-    return {name: folderDB.name, folderChildren}
+    return {name: folderDB.name, folderChildren, parent: folderDB.parentId}
 }
 
 export const actions: Actions = {

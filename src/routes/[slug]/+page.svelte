@@ -2,10 +2,17 @@
 	import { resolve } from '$app/paths';
 
     let {data} = $props()
+
+    let parentFolder = $derived(data.parent ?? "")
 </script>
 
 <p class="font-bold">{data.name}</p>
 <br>
+
+<a href={resolve(`/${parentFolder}`)} class="flex border-t-2 border-t-black border-b-2 border-b-black items-center space-x-3">
+    <img src="/up.svg" alt="up" class="w-7 h-7">
+    <p>Go up</p>
+</a>
 
 <div>
     {#each data.folderChildren as c (c.id)}
