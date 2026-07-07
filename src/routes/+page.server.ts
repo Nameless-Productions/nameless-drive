@@ -54,8 +54,10 @@ export const actions: Actions = {
 
     file: async ({request}) => {
         const formData = await request.formData()
-        const file = formData.get("file") as File | null;
+        const file = formData.getAll("file") as File[] | null;
         if(!file) return fail(400, {error: "File required"});
-        await uploadFile(file, undefined);
+        file.forEach(async (f) => {
+            await uploadFile(f, undefined);
+        })
     }
 }
