@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { redirect } from '@sveltejs/kit';
 
     let {data} = $props()
 
@@ -8,7 +7,7 @@
 
     function getUrl(isFolder: boolean, id: number) {
         if(isFolder) return `/${id}`;
-        return `/download/${id}`
+        return `/${id}/view`
     }
 </script>
 
@@ -29,6 +28,7 @@
                 <img src="/file.svg" alt="file" class="w-7 h-7">
             {/if}
             <a href={getUrl(c.isFolder, c.id)}>{c.name}</a>
+            <a href={resolve(`/download/${c.id}`)} class="p-1 bg-blue-600 hover:bg-blue-700 duration-300 m-1 rounded-xl cursor-pointer">Download</a>
             <a href={resolve(`/${c.id}/delete`)} class="ml-auto p-1 bg-red-500 hover:bg-red-400 duration-300 m-1 rounded-xl cursor-pointer">Delete</a>
         </div>
     {/each}
