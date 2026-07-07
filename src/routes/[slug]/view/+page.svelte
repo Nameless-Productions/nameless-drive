@@ -13,4 +13,6 @@
     <video src={`/download/${data.id}`} controls>
         <track kind="captions"><track/>
     </video>
+    {:else if data.type === "pdf"}
+    <iframe src={`/download/${data.id}`} title={data.fileName} frameborder="0"></iframe>
 {/if}

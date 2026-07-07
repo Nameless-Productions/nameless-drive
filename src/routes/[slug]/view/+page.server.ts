@@ -26,6 +26,8 @@ export const load: PageServerLoad = async ({params}) => {
         return {id: thingID, type: "image", fileName: thingDB.name}
     } else if(thingDB.name.endsWith(".mp4") || thingDB.name.endsWith(".mov") || thingDB.name.endsWith(".mkv")) {
         return {id: thingID, type: "video", fileName: thingDB.name}
+    } else if(thingDB.name.endsWith(".pdf")) {
+        return {id: thingID, type: "pdf", fileName: thingDB.name}
     } else {
         return error(400, "File type not supported")
     }
