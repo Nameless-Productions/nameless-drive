@@ -4,4 +4,9 @@
 
 <p class="font-bold">{data.fileName}</p>
 <br>
-<p style="white-space: pre-line;">{data.fileText}</p>
+
+{#if data.type === "text"}
+    <p style="white-space: pre-line;">{data.fileText}</p>
+    {:else}
+    <img src={`/download/${data.id}`} alt="image">
+{/if}

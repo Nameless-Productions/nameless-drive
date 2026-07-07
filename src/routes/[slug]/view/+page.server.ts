@@ -14,12 +14,15 @@ export const load: PageServerLoad = async ({params}) => {
     });
     
     if(!thingDB || thingDB.isFolder) return error(404, "File not found or is a folder");
-    if(!thingDB.name.endsWith(".txt")) return error(400, "Not a txt file")
 
-    const file = await getFile(thingID);
-    if(!file) return error(404, "File doesn't exists");
+    if(thingDB.name.endsWith(".txt")) {
+        const file = await getFile(thingID);
+        if(!file) return error(404, "File doesn't exists");
 
-    const fileText = file.toString("utf-8");
+        const fileText = file.toString("utf-8");
 
-    return {fileText, fileName: thingDB.name}
+        return {fileText, fileName: thingDB.name, type: "text", id: thingDB.id}
+    } else if(thingDB.name.endsWith(".png") || thingDB.name.endsWith(".jpg") || thingDB.name.endsWith(".jpeg") || thingDB.name.endsWith(".webp") || thingDB.name.endsWith(".gif")) {
+        return {id: thingID, type: "image", fileName: thingDB.name}
+    }
 }
