@@ -24,5 +24,9 @@ export const load: PageServerLoad = async ({params}) => {
         return {fileText, fileName: thingDB.name, type: "text", id: thingDB.id}
     } else if(thingDB.name.endsWith(".png") || thingDB.name.endsWith(".jpg") || thingDB.name.endsWith(".jpeg") || thingDB.name.endsWith(".webp") || thingDB.name.endsWith(".gif")) {
         return {id: thingID, type: "image", fileName: thingDB.name}
+    } else if(thingDB.name.endsWith(".mp4") || thingDB.name.endsWith(".mov") || thingDB.name.endsWith(".mkv")) {
+        return {id: thingID, type: "video", fileName: thingDB.name}
+    } else {
+        return error(400, "File type not supported")
     }
 }
