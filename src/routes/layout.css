@@ -11,3 +11,7 @@ input {
 input[type="submit"] {
     @apply border-3 border-b-6 border-gray-900 p-2 rounded-xl cursor-pointer hover:bg-neutral-900 duration-500
 }
+
+.navBtn {
+    @apply text-lg hover:font-bold duration-300 
+}

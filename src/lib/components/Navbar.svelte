@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import NewBtn from "./NewBtn.svelte";
 </script>
 
@@ -6,4 +7,6 @@
     <p class="text-xl font-bold">Nameless Drive</p>
 
     <NewBtn />
+
+    <a class="navBtn" href={resolve("/profile")}>Profile</a>
 </nav>
