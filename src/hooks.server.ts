@@ -23,7 +23,8 @@ export const handle: Handle = async ({event, resolve}) => {
 
     if(!usrDB) return redirect(302, new URL("/login", event.url));
 
+    event.locals.user = {id: usrDB.id, username: usrDB.username};
+
     const res = await resolve(event);
-    res.headers.set("x-username", usrDB.username);
     return res;
 }
