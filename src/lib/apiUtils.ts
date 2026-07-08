@@ -30,3 +30,19 @@ export async function createApiKey(uid: number) {
 
     return jwt.sign({uid}, usr.apiSecret);
 }
+
+export async function updateUserSecret(uid: number) {
+    const user = await db.user.findUnique({
+        where: {
+            id: uid
+        }
+    });
+    if(!user) return;
+
+    await db.user.update({
+        where: user,
+        data: {
+            apiSecret: crypto.randomUUID()
+        }
+    })
+}
