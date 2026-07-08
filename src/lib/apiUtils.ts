@@ -19,3 +19,14 @@ export async function verifyApiKey(key: string) {
         return false;
     }
 }
+
+export async function createApiKey(uid: number) {
+    const usr = await db.user.findUnique({
+        where: {
+            id: uid
+        }
+    });
+    if(!usr) return;
+
+    return jwt.sign({uid}, usr.apiSecret);
+}
