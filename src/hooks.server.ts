@@ -1,13 +1,25 @@
+import { verifyApiKey } from "$lib/apiUtils";
 import { db } from "$lib/db";
 import { verifyToken } from "$lib/jwt";
-import { redirect, type Handle } from "@sveltejs/kit";
+import { json, redirect, type Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({event, resolve}) => {
     const path = event.url.pathname;
 
     if(path.startsWith("/login")) return await resolve(event);
     const users = await db.user.findMany({})
-    if (users.length === 0) return await resolve(event)
+    if (users.length === 0) return await resolve(event);
+
+    if(path.startsWith("/api")) {
+        const headers = event.request.headers;
+        const apiKey = headers.get("X-API-key")
+        if(!apiKey) return json({error: "No api key provided"}, {status: 401});
+
+        const verifyKey = await verifyApiKey(apiKey);
+        if(!verifyKey) return json({error: "Invalid API key"}, {status: 401});
+
+        return await resolve(event);
+    }
 
     const token = event.cookies.get("token")
     if(!token) return redirect(302, new URL("/login", event.url));
