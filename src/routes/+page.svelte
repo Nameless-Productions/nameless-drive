@@ -2,11 +2,6 @@
 	import { resolve } from '$app/paths';
 
 	let { data } = $props();
-
-	function getUrl(isFolder: boolean, id: number) {
-		if (isFolder) return `/${id}`;
-		return `/${id}/view`;
-	}
 </script>
 
 <div>
@@ -17,7 +12,7 @@
 			{:else}
 				<img src="/file.svg" alt="file" class="w-7 h-7" />
 			{/if}
-			<a href={getUrl(c.isFolder, c.id)}>{c.name}</a>
+			<a href={resolve(c.isFolder ? `/${c.id}` : `/${c.id}/view`)}>{c.name}</a>
 			{#if !c.isFolder}
 				<a
 					href={resolve(`/download/${c.id}`)}
