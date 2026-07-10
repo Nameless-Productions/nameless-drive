@@ -20,3 +20,6 @@ jobs:
           pnpm lint
           pnpm check
           pnpm build
+        env:
+          SECRET: some-dummy-thing
+          DATABASE_URL: file:./database.db
