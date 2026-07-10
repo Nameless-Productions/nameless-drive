@@ -1,10 +1,15 @@
 import { verifyApiKey } from "$lib/apiUtils";
 import { db } from "$lib/db";
 import { verifyToken } from "$lib/jwt";
-import { json, redirect, type Handle } from "@sveltejs/kit";
+import { limiter } from "$lib/rateLimiter";
+import { error, json, redirect, type Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({event, resolve}) => {
     const path = event.url.pathname;
+
+    if(await limiter.isLimited(event)) {
+        return error(429, "Rate limited")
+    }
 
     if(path.startsWith("/login")) return await resolve(event);
     const users = await db.user.findMany({})
