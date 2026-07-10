@@ -1,21 +1,20 @@
-import jwt from "jsonwebtoken"
-import "dotenv/config"
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
-const secret = process.env["SECRET"]
+const secret = process.env['SECRET'];
 
-if (!secret) throw new Error("Missing SECRET in env");
+if (!secret) throw new Error('Missing SECRET in env');
 
-export function createToken(payload: {uid: number, username: string}){
-    return jwt.sign(payload, secret!);
+export function createToken(payload: { uid: number; username: string }) {
+	return jwt.sign(payload, secret!);
 }
 
-export function verifyToken(jwtToken: string){
-    try{
-        const usr = jwt.verify(jwtToken, secret!) as {uid?: number, username?: string};
-        if(!usr.uid || !usr.username) return;
-        return usr;
-    }
-    catch{
-        return;
-    }
+export function verifyToken(jwtToken: string) {
+	try {
+		const usr = jwt.verify(jwtToken, secret!) as { uid?: number; username?: string };
+		if (!usr.uid || !usr.username) return;
+		return usr;
+	} catch {
+		return;
+	}
 }

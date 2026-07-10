@@ -1,21 +1,21 @@
 @import 'tailwindcss';
 
 body {
-    @apply bg-neutral-800
+	@apply bg-neutral-800;
 }
 
 input {
-    @apply border-3 border-b-6 border-gray-900 p-2 rounded-xl
+	@apply rounded-xl border-3 border-b-6 border-gray-900 p-2;
 }
 
-input[type="submit"] {
-    @apply border-3 border-b-6 border-gray-900 p-2 rounded-xl cursor-pointer hover:bg-neutral-900 duration-500
+input[type='submit'] {
+	@apply cursor-pointer rounded-xl border-3 border-b-6 border-gray-900 p-2 duration-500 hover:bg-neutral-900;
 }
 
 .navBtn {
-    @apply text-lg hover:font-bold duration-300 
+	@apply text-lg duration-300 hover:font-bold;
 }
 
 .link {
-    @apply underline text-blue-500
+	@apply text-blue-500 underline;
 }

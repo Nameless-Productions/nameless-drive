@@ -9,12 +9,11 @@
 
 <svelte:head><link rel="icon" href="https://thenamelessdev.com/logo.svg" /></svelte:head>
 
-
 {#if data.isSetup}
-	{#if !$page.url.pathname.startsWith("/login")}
+	{#if !$page.url.pathname.startsWith('/login')}
 		<Navbar />
 	{/if}
 	<main class="m-2 text-neutral-300">{@render children()}</main>
-	{:else}
+{:else}
 	<Setup />
 {/if}
